@@ -7,11 +7,11 @@
       "RelativeMoniker": "D:0:0:{5DF61229-0D87-446E-A0D0-7ED671083941}|Contoso\\Contoso.csproj|solutionrelative:contoso\\views\\students\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5DF61229-0D87-446E-A0D0-7ED671083941}|Contoso\\Contoso.csproj|c:\\users\\opilane\\source\\repos\\contoso\\contoso\\controllers\\studentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{5DF61229-0D87-446E-A0D0-7ED671083941}|Contoso\\Contoso.csproj|C:\\Users\\opilane\\source\\repos\\Contoso\\contoso\\controllers\\studentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5DF61229-0D87-446E-A0D0-7ED671083941}|Contoso\\Contoso.csproj|solutionrelative:contoso\\controllers\\studentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5DF61229-0D87-446E-A0D0-7ED671083941}|Contoso\\Contoso.csproj|c:\\users\\opilane\\source\\repos\\contoso\\contoso\\models\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{5DF61229-0D87-446E-A0D0-7ED671083941}|Contoso\\Contoso.csproj|C:\\Users\\opilane\\source\\repos\\Contoso\\contoso\\models\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5DF61229-0D87-446E-A0D0-7ED671083941}|Contoso\\Contoso.csproj|solutionrelative:contoso\\models\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -22,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -53,6 +53,10 @@
               "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Index.cshtml",
@@ -75,8 +79,7 @@
               "RelativeToolTip": "Contoso\\Controllers\\StudentsController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T16:25:12.67Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-18T16:25:12.67Z"
             },
             {
               "$type": "Document",
@@ -88,8 +91,7 @@
               "RelativeToolTip": "Contoso\\Models\\Student.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAABDAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T16:11:48.5Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-18T16:11:48.5Z"
             }
           ]
         },
