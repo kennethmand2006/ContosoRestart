@@ -1,6 +1,6 @@
 ﻿using Contoso.Data;
 using Contoso.Models;
-using ContosoUniversity.Models;
+using Contoso.Models;
 using System;
 using System.Linq;
 
