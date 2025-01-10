@@ -4,6 +4,7 @@ using Contoso.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Contoso.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    partial class SchoolContextModelSnapshot : ModelSnapshot
+    [Migration("20250110111742_ffffffff")]
+    partial class ffffffff
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,16 +36,11 @@ namespace Contoso.Migrations
                     b.Property<int>("Credits")
                         .HasColumnType("int");
 
-                    b.Property<int?>("EnrollmentID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CourseID");
-
-                    b.HasIndex("EnrollmentID");
 
                     b.ToTable("Course", (string)null);
                 });
@@ -66,8 +64,6 @@ namespace Contoso.Migrations
 
                     b.HasKey("EnrollmentID");
 
-                    b.HasIndex("CourseID");
-
                     b.ToTable("Enrollment", (string)null);
                 });
 
@@ -90,13 +86,24 @@ namespace Contoso.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Secret")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("ID");
 
                     b.ToTable("Student", (string)null);
+                });
+
+            modelBuilder.Entity("CourseEnrollment", b =>
+                {
+                    b.Property<int>("CoursesCourseID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EnrollmentsEnrollmentID")
+                        .HasColumnType("int");
+
+                    b.HasKey("CoursesCourseID", "EnrollmentsEnrollmentID");
+
+                    b.HasIndex("EnrollmentsEnrollmentID");
+
+                    b.ToTable("CourseEnrollment");
                 });
 
             modelBuilder.Entity("EnrollmentStudent", b =>
@@ -114,22 +121,19 @@ namespace Contoso.Migrations
                     b.ToTable("EnrollmentStudent");
                 });
 
-            modelBuilder.Entity("Contoso.Models.Course", b =>
+            modelBuilder.Entity("CourseEnrollment", b =>
                 {
-                    b.HasOne("Contoso.Models.Enrollment", null)
-                        .WithMany("Courses")
-                        .HasForeignKey("EnrollmentID");
-                });
-
-            modelBuilder.Entity("Contoso.Models.Enrollment", b =>
-                {
-                    b.HasOne("Contoso.Models.Course", "Course")
+                    b.HasOne("Contoso.Models.Course", null)
                         .WithMany()
-                        .HasForeignKey("CourseID")
+                        .HasForeignKey("CoursesCourseID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Course");
+                    b.HasOne("Contoso.Models.Enrollment", null)
+                        .WithMany()
+                        .HasForeignKey("EnrollmentsEnrollmentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("EnrollmentStudent", b =>
@@ -145,11 +149,6 @@ namespace Contoso.Migrations
                         .HasForeignKey("StudentsID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Contoso.Models.Enrollment", b =>
-                {
-                    b.Navigation("Courses");
                 });
 #pragma warning restore 612, 618
         }

@@ -7,16 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<SchoolContext>(options => 
-options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<SchoolContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 CreateDbIfNotExists(app);
-
-
-
-app.Run();
-
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -41,7 +36,7 @@ app.Run();
 
 static void CreateDbIfNotExists(WebApplication app)
 {
-    using(var scope = app.Services.CreateScope())
+    using (var scope = app.Services.CreateScope())
     {
         var services = scope.ServiceProvider;
         try
@@ -51,8 +46,8 @@ static void CreateDbIfNotExists(WebApplication app)
         }
         catch (Exception ex)
         {
-            var logger = services.GetRequiredService<ILogger>();
-            logger.LogError(ex, "An error occurred creating DB");
+            var logger = services.GetRequiredService<ILogger<Program>>();
+            logger.LogError(ex, "An error occurred creating the DB.");
         }
     }
 }
