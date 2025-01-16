@@ -2,7 +2,6 @@
 using Contoso.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics.Contracts;
 
 namespace Contoso.Controllers
 {
@@ -58,9 +57,9 @@ namespace Contoso.Controllers
                 return NotFound();
             }
             var StudentToUpdate = await _context.Students.FirstOrDefaultAsync(s => s.ID == id);
-            if ( await TryUpdateModelAsync<Student>(
-                "",
-                s => s.FirstName, s => s.LastName, s => s.EnrollmentDate))
+            if (await TryUpdateModelAsync<Student>(StudentToUpdate,
+                "", 
+                s => s.FirstName, s => s.LastName, s => s.EnrollmentDate)) 
             {
                 try
                 {
@@ -79,9 +78,31 @@ namespace Contoso.Controllers
             return View();
         
         }
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var student = await _context.Students.FindAsync(id);
+            if (student == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
 
-        
-        public async Task<IActionResult> Details(int? id)
+            try
+            {
+                _context.Students.Remove(student);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException ex )
+            {
+                //Log the error (uncomment ex variable name and write a log.)
+                return RedirectToAction(nameof(Index), new { id = id, saveChangesError = true });
+            }
+        }
+
+
+        public async Task<IActionResult> Details(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
@@ -89,14 +110,19 @@ namespace Contoso.Controllers
             }
 
             var student = await _context.Students
-                .Include(s => s.Enrollments)
-                    .ThenInclude(e => e.Courses)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ID == id);
 
             if (student == null)
             {
                 return NotFound();
+            }
+
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] =
+                    "Delete failed. Try again, and if the problem presists " +
+                    "see your system adminstrator.";
             }
 
             return View(student);
